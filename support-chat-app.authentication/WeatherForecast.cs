@@ -1,6 +1,6 @@
 using System;
 
-namespace support_chat_app.authentication
+namespace Support_Chat_App.Authentication
 {
     public class WeatherForecast
     {

@@ -6,7 +6,7 @@ using Support_Chat_App.DataAccess.Data;
 using Support_Chat_App.Entities;
 using System;
 
-namespace support_chat_app.authentication
+namespace Support_Chat_App.Authentication
 {
     public class Program
     {
