@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace support_chat_app.authentication.Controllers
+namespace Support_Chat_App.Authentication.Controllers
 {
     [ApiController]
     [Route("v1/[controller]")]

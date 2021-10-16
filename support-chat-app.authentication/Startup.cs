@@ -10,7 +10,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace support_chat_app.authentication
+namespace Support_Chat_App.Authentication
 {
     public class Startup
     {

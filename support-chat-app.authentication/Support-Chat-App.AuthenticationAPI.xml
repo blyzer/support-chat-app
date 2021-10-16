@@ -4,7 +4,7 @@
         <name>Support-Chat-App.AuthenticationAPI</name>
     </assembly>
     <members>
-        <member name="M:support_chat_app.authentication.Program.CreateDatabase(Microsoft.Extensions.Hosting.IHost)">
+        <member name="M:Support_Chat_App.Authentication.Program.CreateDatabase(Microsoft.Extensions.Hosting.IHost)">
             <summary>
             Create database if it is not exist
             </summary>
