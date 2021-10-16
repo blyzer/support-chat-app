@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>D:\Career\Interviews\Practical Tests\support-chat-app\support-chat-app.authentication\support-chat-app.authentication.xml</DocumentationFile>
+    <DocumentationFile>D:\Career\Interviews\Practical Tests\support-chat-app\support-chat-app.authentication\Support-Chat-App.AuthenticationAPI.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
