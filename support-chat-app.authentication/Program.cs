@@ -1,11 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Support_Chat_App.DataAccess.Data;
+using Support_Chat_App.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace support_chat_app.authentication
 {
@@ -13,7 +12,9 @@ namespace support_chat_app.authentication
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            CreateDatabase(host);
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -22,5 +23,28 @@ namespace support_chat_app.authentication
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
+        /// <summary>
+        /// Create database if it is not exist
+        /// </summary>
+        /// <param name="host"></param>
+        private static void CreateDatabase(IHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                try
+                {
+                    var context = services.GetRequiredService<SupportChatContext>();
+                    DataFeeder.SeedData(context);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "An error occurred creating the DB.");
+                }
+                logger.LogInformation("Database creation is succeeded.");
+            }
+        }
     }
 }
