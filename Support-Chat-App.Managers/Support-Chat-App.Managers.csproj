@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Support_Chat_App.Managers</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Support-Chat-App.DataAccess\Support-Chat-App.Data.csproj" />
+    <ProjectReference Include="..\Support-Chat-App.Repositories\Support-Chat-App.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

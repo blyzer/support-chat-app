@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Support_Chat_App.DataAccess.Entities;
+using Support_Chat_App.Data.Entities;
 
-namespace Support_Chat_App.Entities
+namespace Support_Chat_App.Data
 {
     public class SupportChatContext : DbContext
     {

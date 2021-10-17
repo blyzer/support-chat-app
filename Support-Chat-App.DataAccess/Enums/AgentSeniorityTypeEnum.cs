@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace Support_Chat_App.DataAccess.Data.Enums
+namespace Support_Chat_App.Data.Enums
 {
-    enum AgentSeniorityTypeEnum
+    public enum AgentSeniorityTypeEnum
     {
         [Description("Junior")]
         Junior = 1,

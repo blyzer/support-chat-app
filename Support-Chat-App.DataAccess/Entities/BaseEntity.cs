@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Support_Chat_App.DataAccess.Entities
+namespace Support_Chat_App.Data.Entities
 {
     public class BaseEntity
     {
