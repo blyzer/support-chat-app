@@ -42,7 +42,9 @@ namespace Support_Chat_App.AuthenticationAPI
             // configure DI for application services
             services.AddTransient<ITokenController, TokenController>();
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IUserManager, UserManager>(); 
+            services.AddTransient<IUserManager, UserManager>();
+            //services.AddTransient<IChatRepository, ChatRepository>();
+            //services.AddTransient<IChatManager, ChatManager>();
 
             //Customerize the swagger ui
             services.AddSwaggerGen(c =>

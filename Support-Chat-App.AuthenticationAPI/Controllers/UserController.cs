@@ -3,7 +3,6 @@ using Support_Chat_App.Data.Enums;
 using Support_Chat_App.Data.RequestModels;
 using Support_Chat_App.Repositories.Authorization;
 using Microsoft.Extensions.Logging;
-using Support_Chat_App.Data.Dtos;
 using Support_Chat_App.Managers.IManagers;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -61,7 +60,7 @@ namespace Support_Chat_App.AuthenticationAPI.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [Authorize(UserTypeEnum.Agent)]
+        [Authorize(UserTypeEnum.Client)]
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {

@@ -7,6 +7,8 @@ namespace Support_Chat_App.Data.Enums
         [Description("Client")]
         Client = 1,
         [Description("Agent")]
-        Agent
+        Agent,
+        [Description("Admin")]
+        Admin
     }
 }
