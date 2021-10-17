@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Support-Chat-App.AuthenticationAPI", "support-chat-app.authentication\Support-Chat-App.AuthenticationAPI.csproj", "{EBEEE08D-1805-4D80-AB4E-0F33647DB06B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Support-Chat-App.Data", "Support-Chat-App.DataAccess\Support-Chat-App.Data.csproj", "{5186EE6F-5729-46C4-B06B-1A271DF98124}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Support-Chat-App.Repositories", "Support-Chat-App.Repositories\Support-Chat-App.Repositories.csproj", "{0586B4E1-6B53-45ED-BD2B-BE60CAD7E113}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Support-Chat-App.Managers", "Support-Chat-App.Managers\Support-Chat-App.Managers.csproj", "{6979D943-BE79-4EE0-BD8D-CDBCC48077E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Support-Chat-App.AuthenticationAPI", "Support-Chat-App.AuthenticationAPI\Support-Chat-App.AuthenticationAPI.csproj", "{4370465F-9078-4216-A267-4988B29089E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EBEEE08D-1805-4D80-AB4E-0F33647DB06B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBEEE08D-1805-4D80-AB4E-0F33647DB06B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBEEE08D-1805-4D80-AB4E-0F33647DB06B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBEEE08D-1805-4D80-AB4E-0F33647DB06B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5186EE6F-5729-46C4-B06B-1A271DF98124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5186EE6F-5729-46C4-B06B-1A271DF98124}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5186EE6F-5729-46C4-B06B-1A271DF98124}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{6979D943-BE79-4EE0-BD8D-CDBCC48077E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6979D943-BE79-4EE0-BD8D-CDBCC48077E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6979D943-BE79-4EE0-BD8D-CDBCC48077E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4370465F-9078-4216-A267-4988B29089E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4370465F-9078-4216-A267-4988B29089E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4370465F-9078-4216-A267-4988B29089E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4370465F-9078-4216-A267-4988B29089E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
