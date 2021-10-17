@@ -3,7 +3,6 @@ using Support_Chat_App.Data.Enums;
 using Support_Chat_App.Data.RequestModels;
 using Support_Chat_App.Repositories.Authorization;
 using Microsoft.Extensions.Logging;
-using Support_Chat_App.Data.Dtos;
 using Support_Chat_App.Managers.IManagers;
 using Microsoft.AspNetCore.Http;
 using System;
