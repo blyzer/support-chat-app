@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Support_Chat_App.DataAccess.Entities
+namespace Support_Chat_App.Data.Entities
 {
     public class AgentSeniorityType : BaseEntity
     {

@@ -1,8 +1,7 @@
-﻿using Support_Chat_App.DataAccess.Entities;
-using Support_Chat_App.Entities;
+﻿using Support_Chat_App.Data.Entities;
 using System.Linq;
 
-namespace Support_Chat_App.DataAccess.Data
+namespace Support_Chat_App.Data.Helpers
 {
     public static class DataFeeder
     {

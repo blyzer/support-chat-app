@@ -5,12 +5,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Support_Chat_App.Entities;
+using Support_Chat_App.Repositories.Authorization;
+using Support_Chat_App.Data.Helpers;
+using Support_Chat_App.Repositories.IRepositories;
+using Support_Chat_App.Repositories.Repositories;
 using System;
 using System.IO;
 using System.Reflection;
+using Support_Chat_App.Data;
+using Support_Chat_App.Managers.IManagers;
+using Support_Chat_App.Managers.Managers;
 
-namespace Support_Chat_App.Authentication
+namespace Support_Chat_App.AuthenticationAPI
 {
     public class Startup
     {
@@ -27,7 +33,16 @@ namespace Support_Chat_App.Authentication
             services.AddDbContext<SupportChatContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
             services.AddControllers();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            // configure DI for application services
+            services.AddTransient<ITokenController, TokenController>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserManager, UserManager>(); 
 
             //Customerize the swagger ui
             services.AddSwaggerGen(c =>
@@ -47,7 +62,7 @@ namespace Support_Chat_App.Authentication
 
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);        
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
@@ -62,6 +77,8 @@ namespace Support_Chat_App.Authentication
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<TokenMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Support_Chat_App.DataAccess.Data;
-using Support_Chat_App.Entities;
+using Support_Chat_App.Data.Helpers;
 using System;
+using Support_Chat_App.Data;
 
-namespace Support_Chat_App.Authentication
+namespace Support_Chat_App.AuthenticationAPI
 {
     public class Program
     {
