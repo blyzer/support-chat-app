@@ -11,6 +11,8 @@ namespace Support_Chat_App.Data.Helpers
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<UserType, UserTypeDto>().ReverseMap();
             CreateMap<AgentSeniorityType, AgentSeniorityTypeDto>().ReverseMap();
+            CreateMap<Chat, ChatDto>().ReverseMap();
+            CreateMap<AgentChat, AgentChatDto>().ReverseMap(); 
         }
     }
 }

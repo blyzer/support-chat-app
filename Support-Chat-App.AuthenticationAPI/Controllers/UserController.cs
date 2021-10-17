@@ -60,7 +60,7 @@ namespace Support_Chat_App.AuthenticationAPI.Controllers
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [Authorize(UserTypeEnum.Agent)]
+        [Authorize(UserTypeEnum.Client)]
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {

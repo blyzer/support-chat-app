@@ -11,6 +11,7 @@ namespace Support_Chat_App.Data.Enums
         [Description("Senior")]
         Senior,
         [Description("Team Lead")]
-        TeamLead
+        TeamLead,
+
     }
 }

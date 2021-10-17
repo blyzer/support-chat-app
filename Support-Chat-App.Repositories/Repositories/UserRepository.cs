@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Support_Chat_App.Data;
 using Support_Chat_App.Data.Dtos;
-using Support_Chat_App.Data.RequestModels;
-using Support_Chat_App.Data.ResponseModels;
-using Support_Chat_App.Repositories.Authorization;
+using Support_Chat_App.Data.Enums;
 using Support_Chat_App.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ namespace Support_Chat_App.Repositories.Repositories
         private SupportChatContext _context;
         private IMapper _mapper;
 
-        public UserRepository(SupportChatContext context, 
+        public UserRepository(SupportChatContext context,
             IMapper mapper)
         {
             _context = context;
@@ -33,10 +32,10 @@ namespace Support_Chat_App.Repositories.Repositories
             {
                 return _mapper.Map<List<UserDto>>(_context.Users);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception($"Couldn't retrieve users: {ex.Message}");
-            }     
+            }
         }
 
         /// <summary>
@@ -74,7 +73,38 @@ namespace Support_Chat_App.Repositories.Repositories
             catch (Exception ex)
             {
                 throw new Exception($"Couldn't find the email: {ex.Message}");
-            }           
+            }
+        }
+
+        /// <summary>
+        /// Get User with the seniority
+        /// </summary>
+        /// <param name="teamTypeId"></param>
+        /// <returns>Requested User</returns>
+        public List<UserWithSeniority> GetByTeamType(long teamTypeId)
+        {
+            try
+            {
+                return _context.Users
+                            .Include(x => x.AgentSeniorityType)
+                            .Include(x => x.AgentChats)
+                            .Where(x => x.TeamTypeId == teamTypeId || 
+                                    x.TeamTypeId == (long)TeamEnum.Overflow)
+                            .OrderBy(x => x.AgentChats.Count)
+                            .Select(x => new UserWithSeniority()
+                            {
+                                UserId = x.Id,
+                                Seniority = x.AgentSeniorityType.SeniorityMultiplier,
+                                ChatCount = x.AgentChats.Count(x => x.CreatedOn.Value.Date == DateTime.UtcNow.Date),
+                                AgentSeniorityTypeId = x.AgentSeniorityTypeId.Value,
+                                IsOverflowAgent = x.TeamTypeId == (long)TeamEnum.Overflow
+                            }).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
     }
 }

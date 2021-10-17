@@ -10,5 +10,6 @@ namespace Support_Chat_App.Repositories.IRepositories
         UserDto GetByEmail(string email);
         IEnumerable<UserDto> GetAll();
         UserDto GetById(long id);
+        List<UserWithSeniority> GetByTeamType(long teamTypeId);
     }
 }

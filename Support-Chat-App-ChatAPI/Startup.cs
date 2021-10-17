@@ -5,18 +5,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Support_Chat_App.Repositories.Authorization;
+using upport_Chat_App.Managers.ChatSessionReceiver;
+using upport_Chat_App.Managers.ChatSessionSender;
+using Support_Chat_App.Data;
 using Support_Chat_App.Data.Helpers;
+using Support_Chat_App.Managers.IManagers;
+using Support_Chat_App.Managers.Managers;
+using Support_Chat_App.Repositories.Authorization;
 using Support_Chat_App.Repositories.IRepositories;
 using Support_Chat_App.Repositories.Repositories;
 using System;
 using System.IO;
 using System.Reflection;
-using Support_Chat_App.Data;
-using Support_Chat_App.Managers.IManagers;
-using Support_Chat_App.Managers.Managers;
 
-namespace Support_Chat_App.AuthenticationAPI
+namespace Support_Chat_App_ChatAPI
 {
     public class Startup
     {
@@ -34,6 +36,7 @@ namespace Support_Chat_App.AuthenticationAPI
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.Configure<RabbitMqConfiguration>(Configuration.GetSection("RabbitMq"));
 
             services.AddControllers();
 
@@ -41,10 +44,10 @@ namespace Support_Chat_App.AuthenticationAPI
 
             // configure DI for application services
             services.AddTransient<ITokenController, TokenController>();
+            services.AddSingleton<IChatRepository, ChatRepository>();
+            services.AddTransient<IChatManager, ChatManager>();
             services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IUserManager, UserManager>();
-            //services.AddTransient<IChatRepository, ChatRepository>();
-            //services.AddTransient<IChatManager, ChatManager>();
+            services.AddTransient<IChatSessionCreationSender, ChatSessionCreationSender>();
 
             //Customerize the swagger ui
             services.AddSwaggerGen(c =>
@@ -52,8 +55,8 @@ namespace Support_Chat_App.AuthenticationAPI
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Support Chat App - Authorization",
-                    Description = "An API to log in to the Chat App - To Generate the JWT token",
+                    Title = "Support Chat App - Chat",
+                    Description = "An API to create the Chat sessions",
                     Contact = new OpenApiContact
                     {
                         Name = "Darshana Edirisinghe",
@@ -66,6 +69,16 @@ namespace Support_Chat_App.AuthenticationAPI
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
+            //RabitMq configurations
+            var rabbitMqSection = Configuration.GetSection("RabbitMq");
+            var rabbitMqConfigurations = rabbitMqSection.Get<RabbitMqConfiguration>();
+            services.Configure<RabbitMqConfiguration>(rabbitMqSection);
+
+            if (rabbitMqConfigurations.ConsumerEnabled)
+            {
+                services.AddHostedService<CreateChatSessionReceiver>();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,7 +104,7 @@ namespace Support_Chat_App.AuthenticationAPI
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Authentication API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Chat API V1");
                 c.RoutePrefix = string.Empty;
             });
         }

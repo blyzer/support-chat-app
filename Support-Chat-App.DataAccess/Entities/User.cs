@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Support_Chat_App.Data.Entities
@@ -19,7 +20,13 @@ namespace Support_Chat_App.Data.Entities
         [Column("agent_seniority_type_id")]
         public long? AgentSeniorityTypeId { get; set; }
 
+        [ForeignKey("TeamType")]
+        [Column("team_type_id")]
+        public long? TeamTypeId { get; set; }
+
         public UserType UserType { get; set; }
         public AgentSeniorityType AgentSeniorityType { get; set; }
+        public TeamType TeamType { get; set; }
+        public ICollection<AgentChat> AgentChats { get; set; }
     }
 }
